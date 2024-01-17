@@ -1,11 +1,11 @@
-service: my-serverless-app
+service: nodejs-aws-lambda
 provider:
     name: aws
-    runtime: nodejs14.x
+    runtime: nodejs20.x
+    region: eu-central-1
 functions:
-    hello:
-        handler: handler.hello
+    app:
+        handler: dist/app.handler
         events:
-            - http:
-                  path: /hello
-                  method: get
+            - http: ANY /
+            - http: ANY /{proxy+}
